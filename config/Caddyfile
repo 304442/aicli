@@ -1,21 +1,7 @@
-# Dynamic subdomain routing with configurable domain
-*.{$D1} {
-    @pb host pb.{$D1}
-    handle @pb {
+{$D1} {
+    handle_path /_/* /api/* {
         reverse_proxy dev:8090
     }
-    
-    @jupyter host jupyter.{$D1}
-    handle @jupyter {
-        reverse_proxy dev:8888
-    }
-    
-    @api host api.{$D1}
-    handle @api {
-        reverse_proxy dev:3000
-    }
-    
-    # Default for main app and any other subdomain
     handle {
         reverse_proxy dev:8000
     }
