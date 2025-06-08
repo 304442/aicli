@@ -1,0 +1,65 @@
+# Main entry point - routes to different dev servers based on path
+:80 {
+    # Node.js apps (port 3000)
+    handle_path /node/* {
+        reverse_proxy dev:3000
+    }
+    
+    # Python apps (port 8000)
+    handle_path /python/* {
+        reverse_proxy dev:8000
+    }
+    
+    # Vite dev server (port 5173)
+    handle_path /vite/* {
+        reverse_proxy dev:5173
+    }
+    
+    # Angular dev server (port 4200)
+    handle_path /angular/* {
+        reverse_proxy dev:4200
+    }
+    
+    # General purpose (port 8080)
+    handle_path /api/* {
+        reverse_proxy dev:8080
+    }
+    
+    # Playwright UI (port 9323)
+    handle_path /playwright/* {
+        reverse_proxy dev:9323
+    }
+    
+    # Default root handler
+    handle {
+        respond "AI CLI Development Environment
+        
+Available routes:
+- /node/*     → Node.js app (port 3000)
+- /python/*   → Python app (port 8000)  
+- /vite/*     → Vite dev server (port 5173)
+- /angular/*  → Angular dev server (port 4200)
+- /api/*      → General API (port 8080)
+- /playwright/* → Playwright UI (port 9323)
+
+Configure your dev server to run on the appropriate port." 200
+    }
+}
+
+# Subdomain routing alternative (uncomment to use)
+# *.localhost {
+#     @node host node.localhost
+#     handle @node {
+#         reverse_proxy dev:3000
+#     }
+#     
+#     @python host python.localhost
+#     handle @python {
+#         reverse_proxy dev:8000
+#     }
+#     
+#     @api host api.localhost
+#     handle @api {
+#         reverse_proxy dev:8080
+#     }
+# }
