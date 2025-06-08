@@ -1,0 +1,32 @@
+:80 {
+    # Jupyter Lab
+    handle_path /jupyter/* {
+        reverse_proxy dev:8888
+    }
+    
+    # Node.js dev server
+    handle_path /node/* {
+        reverse_proxy dev:3000
+    }
+    
+    # Python dev server
+    handle_path /python/* {
+        reverse_proxy dev:8000
+    }
+    
+    # API server
+    handle_path /api/* {
+        reverse_proxy dev:8080
+    }
+    
+    # Default handler
+    handle {
+        respond "AI CLI Environment
+        
+Routes:
+- /jupyter/* → Jupyter Lab (8888)
+- /node/*    → Node.js (3000)
+- /python/*  → Python (8000)
+- /api/*     → API server (8080)" 200
+    }
+}

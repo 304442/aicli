@@ -38,6 +38,17 @@ services:
     ports:
       - "2222:22"  # SSH access only
 
+  caddy:
+    image: caddy:alpine
+    container_name: aicli-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - aicli-network
+
 networks:
   aicli-network:
     driver: bridge
