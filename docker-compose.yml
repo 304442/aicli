@@ -35,26 +35,11 @@ services:
     networks:
       - aicli-network
     ports:
-      - "2222:22"  # SSH access on port 2222
-
-  caddy:
-    image: caddy:alpine
-    container_name: aicli-caddy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./config/Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy_data:/data
-      - ./caddy_config:/config
-    networks:
-      - aicli-network
+      - "2222:22"  # SSH access only
 
 networks:
   aicli-network:
     driver: bridge
 
 volumes:
-  caddy_data:
-  caddy_config:
   aicli-home:  # Persist developer home directory
