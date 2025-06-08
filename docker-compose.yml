@@ -17,7 +17,6 @@ services:
       - ./config/.tmux.conf:/home/developer/.tmux.conf:ro
       - ./config/.init.sh:/home/developer/workspace/.init.sh:ro
       - /var/run/docker.sock:/var/run/docker.sock  # Docker-in-Docker support
-      - aicli-home:/home/developer  # Persist home directory
     environment:
       - TERM=xterm-256color
       - ENABLE_SSH=true
@@ -41,5 +40,3 @@ networks:
   aicli-network:
     driver: bridge
 
-volumes:
-  aicli-home:  # Persist developer home directory
