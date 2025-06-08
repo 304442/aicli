@@ -1,10 +1,21 @@
-:80 {
-    # PocketBase admin and API
-    handle_path /pb/* {
+# Dynamic subdomain routing with configurable domain
+*.{$D1} {
+    @pb host pb.{$D1}
+    handle @pb {
         reverse_proxy dev:8090
     }
     
-    # All other dev servers on port 8000
+    @jupyter host jupyter.{$D1}
+    handle @jupyter {
+        reverse_proxy dev:8888
+    }
+    
+    @api host api.{$D1}
+    handle @api {
+        reverse_proxy dev:3000
+    }
+    
+    # Default for main app and any other subdomain
     handle {
         reverse_proxy dev:8000
     }

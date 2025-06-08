@@ -46,6 +46,8 @@ services:
       - "443:443"
     volumes:
       - ./config/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+      - D1=${D1:-localhost}
     networks:
       - aicli-network
 
