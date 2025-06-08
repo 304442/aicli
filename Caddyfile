@@ -30,6 +30,16 @@
         reverse_proxy dev:9323
     }
     
+    # Jupyter Lab (port 8888)
+    handle_path /jupyter/* {
+        reverse_proxy dev:8888
+    }
+    
+    # Jupyter Notebook (port 8889)
+    handle_path /notebook/* {
+        reverse_proxy dev:8889
+    }
+    
     # Default root handler
     handle {
         respond "AI CLI Development Environment
@@ -41,6 +51,8 @@ Available routes:
 - /angular/*  → Angular dev server (port 4200)
 - /api/*      → General API (port 8080)
 - /playwright/* → Playwright UI (port 9323)
+- /jupyter/*  → Jupyter Lab (port 8888)
+- /notebook/* → Jupyter Notebook (port 8889)
 
 Configure your dev server to run on the appropriate port." 200
     }

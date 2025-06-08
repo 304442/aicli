@@ -6,6 +6,14 @@ if [ -f /home/developer/.initialized ]; then
 else
     echo "First run - installing packages..."
     
+    # Add edge and testing repositories for latest packages
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+    
+    # Update package index
+    apk update
+    
     # Install all packages
     apk add --no-cache \
         openssh \
@@ -26,6 +34,7 @@ else
         py3-pip \
         chromium \
         chromium-chromedriver \
+        chromium-swiftshader \
         xvfb \
         dbus \
         ttf-freefont \
@@ -82,7 +91,16 @@ else
         flake8 \
         mypy \
         jupyter \
-        ipython
+        jupyterlab \
+        notebook \
+        ipython \
+        ipykernel \
+        matplotlib \
+        seaborn \
+        plotly \
+        nbconvert \
+        nbformat \
+        ipywidgets
     
     # Configure SSH
     ssh-keygen -A
