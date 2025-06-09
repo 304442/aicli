@@ -1,9 +1,8 @@
 version: '3.8'
 
 services:
-  dev:
+  aicli:
     image: alpine:latest
-    container_name: aicli-dev
     hostname: aicli
     tty: true
     stdin_open: true
@@ -23,7 +22,7 @@ services:
       - TERM=xterm-256color
       - ENABLE_SSH=true
       - ENABLE_DISPLAY=true
-      - PLAYWRIGHT_BROWSERS_PATH=/home/developer/.cache/playwright
+      - PLAYWRIGHT_BROWSERS_PATH=/root/.cache/playwright
       - NODE_ENV=development
       - PYTHONUNBUFFERED=1
       - EDITOR=nvim
